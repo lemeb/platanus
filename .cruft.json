@@ -1,0 +1,23 @@
+{
+  "template": "https://github.com/lemeb/python-library-cookiecutter.git",
+  "commit": "fce8115c131232428d7edad308c99b02d443b870",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "project_name": "Platanus",
+      "project_slug": "platanus",
+      "project_short_description": "A poor man's Kedro.",
+      "version": "0.0.1",
+      "python_min_version": "3.12",
+      "full_name": "Leopold Mebazaa",
+      "github_username": "lemeb",
+      "email": "lemeb@users.noreply.github.com",
+      "project_license": "MIT License",
+      "includes_playwright": "no",
+      "__gh_slug": "lemeb/platanus",
+      "_template": "https://github.com/lemeb/python-library-cookiecutter.git",
+      "_commit": "fce8115c131232428d7edad308c99b02d443b870"
+    }
+  },
+  "directory": null
+}
