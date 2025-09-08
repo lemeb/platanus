@@ -13,12 +13,13 @@ description = "A poor man's Kedro."
 license = { text = "MIT License" }
 readme = "README.md"
 classifiers = [
-    "Programming Language :: Python :: 3",
-    "Operating System :: OS Independent",
-    "Typing :: Typed","License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+  "Typing :: Typed",
+  "License :: OSI Approved :: MIT License",
 ]
 authors = [
-    { name = "Leopold Mebazaa", email = "lemeb@users.noreply.github.com" }
+  { name = "Leopold Mebazaa", email = "lemeb@users.noreply.github.com" },
 ]
 dependencies = [
   # Add your dependencies here
@@ -74,6 +75,8 @@ ignore = [
   "G004",
   # We allow the use of TODOs (under some formats)
   "FIX002",
+  # We don't care about copyright mentions
+  "CPY001",
 ]
 
 # For manual overrides
