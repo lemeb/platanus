@@ -134,8 +134,25 @@ There are two Github Actions workflows:
   request.
 - `cruft-update.yml`: Runs the `cruft update` command every day.
 
+<<<<<<< ours
 > [!CAUTION] The `cruft-update.yml` workflow, by default, does NOT update the
 > GitHub workflows files. They are skipped, silently. If you want to update
 > them, you will need to use a Personal Access Token in the configuration of the
 > workflow. See the [`cruft-update.yml`](.github/workflows/cruft-update.yml)
 > file for more details.
+||||||| base
+> [!CAUTION]
+> The `cruft-update.yml` workflow, by default, does NOT update the GitHub
+> workflows files. They are skipped, silently. If you want to update them,
+> you will need to use a Personal Access Token in the configuration of the
+> workflow. See the [`cruft-update.yml`](.github/workflows/cruft-update.yml)
+> file for more details.
+=======
+> [!CAUTION]
+>
+> The `cruft-update.yml` workflow, by default, does NOT update the GitHub
+> workflows files. They are skipped, silently. If you want to update them, you
+> will need to use a Personal Access Token in the configuration of the workflow.
+> See the [`cruft-update.yml`](.github/workflows/cruft-update.yml) file for more
+> details.
+>>>>>>> theirs

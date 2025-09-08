@@ -1,6 +1,6 @@
 {
   "template": "https://github.com/lemeb/python-library-cookiecutter.git",
-  "commit": "9fa5a66a289b75360dde075aaa9522371bab20b4",
+  "commit": "0f4a79459e84ae868a936f6714a97622a8a6fdae",
   "checkout": null,
   "context": {
     "cookiecutter": {
@@ -16,7 +16,7 @@
       "includes_playwright": "no",
       "__gh_slug": "lemeb/platanus",
       "_template": "https://github.com/lemeb/python-library-cookiecutter.git",
-      "_commit": "9fa5a66a289b75360dde075aaa9522371bab20b4"
+      "_commit": "0f4a79459e84ae868a936f6714a97622a8a6fdae"
     }
   },
   "directory": null
