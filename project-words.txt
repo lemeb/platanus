@@ -8,3 +8,8 @@ mkdocstrings
 mypy
 docstrings
 noqa
+Platanus
+platanus
+Mebazaa
+Kedro
+artefacts
