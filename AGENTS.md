@@ -7,8 +7,8 @@
     help you focus on one thing at a time, and will make it easier to debug
     issues.
   - In practice, it means that you should operate roughly thusly:
-    1. Create the directory and files needed for the feature (and ONLY
-       those files.) Maybe update `.gitignore` if needed.
+    1. Create the directory and files needed for the feature (and ONLY those
+       files.) Maybe update `.gitignore` if needed.
     2. Add the dependencies needed for the feature (and ONLY those
        dependencies.)
     3. Write the code for the feature (and ONLY that code.)
@@ -16,25 +16,34 @@
     5. Run `make test-with-coverage` to see which parts of the code are not
        covered by unit tests (without overwriting `make test-all` coverage).
        Then...
-    5. Write the tests for the feature (and ONLY those tests.) As a general
+    6. Write the tests for the feature (and ONLY those tests.) As a general
        rule, we want 100% coverage WITHOUT any internet / latency request. These
        tests should be triggered with `make test`. HOWEVER, if the feature
-       actually requires internet access or latency (e.g. because it is a
-       LLM call), then add a test in the `tests/integration` folder that will be
+       actually requires internet access or latency (e.g. because it is a LLM
+       call), then add a test in the `tests/integration` folder that will be
        triggered with `make test-all`. In this case, you should still aim for
        two tests: one that mocks the internet / latency request (so that it can
        be run with `make test`), and one that actually does the internet /
        latency request (so that it can be run with `make test-all`.)
-    6. Run the tests and make sure they pass. Note that, for now, `make test`
+    7. Run the tests and make sure they pass. Note that, for now, `make test`
        does not run coverage; use `make test-with-coverage` to track unit test
        coverage without rerunning integration tests.
-    7. Run again `make test-with-coverage` until you reach 100% coverage. If you
+    8. Run again `make test-with-coverage` until you reach 100% coverage. If you
        want to make an exception to that rule, you HAVE to ask the user.
-    8. Run `make check-strict-all` to make sure there are no linting or
+    9. Run `make check-strict-all` to make sure there are no linting or
        type-checking errors.
-    9. Document the feature (and ONLY that documentation, although you might
-       to update / refactor other documentation as needed.)
-    10. Propose a git commit with a clear message explaining what you did. DO
+    10. Document the feature (and ONLY that documentation, although you might to
+        update / refactor other documentation as needed.). If you create a new
+        module, you MUST create a corresponding file in `docs/api/` AND update
+        the `nav` section in `mkdocs.yml` to include it. Don't forget to run
+        `make doc`! This will catch spelling errors - add any new technical
+        terms to `project-words.txt`. Also, if you think documentation would be
+        improved by adding things like tutorials, guides, etc, please propose
+        them to the user. If you see that one of the existing guides or
+        tutorials needs to be updated, please do so proactively and properly.
+    11. **Final verification**: Run `make test && make check-strict-all &&
+        make doc` to ensure everything passes before proposing commits.
+    12. Propose a git commit with a clear message explaining what you did. DO
         NOT COMMIT directly. Oftentimes, it makes sense to split the work into
         multiple commits. In this case, propose multiple commits with clear
         messages.
@@ -49,13 +58,14 @@
   - If you need to add a dev dependency, use `uv add --dev <package>`.
   - Corollary: never modify `pyproject.toml` or `uv.lock` directly as far as
     dependencies are concerned. Always use `uv` commands.
-  - Only add dependencies that are strictly necessary. Yes, you might think
-    that some packages will need to be added later. Well, wait until later then.
+  - Only add dependencies that are strictly necessary. Yes, you might think that
+    some packages will need to be added later. Well, wait until later then.
 
 - **Checking code**:
-  - Use `uv run ruff format . && uv run ruff check . --fix`, then
-    `make check-strict-all` to check your code. Please refer to the earlier
-    instructions on what is appropriate when.
+  - Use `make check-fix` to format code and auto-fix lint errors, then
+    `make check` to run all linting and type checks in parallel. All errors will
+    be shown (the Makefile uses `-k` to keep going on failures). For stricter
+    checks, use `make check-strict-all`.
   - One quirk of `make check-strict-all` is that it will run `ruff`'s preview
     rules. If you want to comment such rule out, you cannot do it in the file;
     it will be removed by `ruff format`. Instead, you should update the
@@ -108,6 +118,29 @@
   - Whenever possible, any references to a file or library (or really any piece
     of code) should be surrounded with backticks. Don't say ("we detect
     uv.lock", say "we detect `uv.lock`").
+  - **Docstring formatting (Google style)**:
+    - In `Returns:` sections, continuation lines must be indented to show they
+      belong to the same return description. For example:
+
+      ```python
+      Returns:
+          The URL with async driver if it was a postgres URL,
+              otherwise the original value unchanged.
+      ```
+
+    - Use cross-references to link to standard library or third-party docs. The
+      syntax is `[`display text`][module.function]`. For example:
+      `Uses [`lru_cache`][functools.lru_cache] to ensure...`
+    - Available inventories are configured in `mkdocs.yml` under `inventories`.
+      Add new ones as needed (e.g., `https://example.com/objects.inv`). Only use
+      cross-references if either (1) the function or object is part of the
+      standard library, (2) the function or object is part of the current
+      library, or (3) is part of an external library but the inventory is in the
+      `inventories` section of `mkdocs.yml` or another plugin takes care of it
+      (like a `griffe-pydantic` plugin for Pydantic objects.)
+
+  - **Before committing**, run `make doc` to verify spell check passes and docs
+    build correctly. Add any new technical terms to `project-words.txt`.
 
 - **Handling linting and type-checking errors** (these are misc notes):
   - In general, if we're dealing with operations that inherently deal with `Any`

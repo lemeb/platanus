@@ -1,0 +1,8 @@
+diff a/project-words.txt b/project-words.txt	(rejected hunks)
+@@ -8,3 +8,6 @@ mkdocstrings
+ mypy
+ docstrings
+ noqa
++pydantic
++
++# Insert yours underneath
